@@ -181,7 +181,7 @@ label, label + * {
 	text-align: left;
 }
 .buttons {
-	margin: 0 0 30px;
+	margin: 0 0 10px;
 }
 .link-rss {
 	display: none;
@@ -4253,12 +4253,15 @@ label, label + * {
 /****** SEARCH & SITEMAP ******/
 
 
+.search-input{
+    background: #fff;
+}
 
 .search-page .page-title {
 	margin: 0 0 -1px;
 }
 .search-input .fieldset {
-	margin: 0 0 30px;
+	margin: 0 0 10px;
 }
 .search-input .form-fields {
 	padding: 30px 15px 10px;
@@ -4284,18 +4287,19 @@ label, label + * {
 .search-input .button-1 {
 	min-width: 140px;
 	border: none;
-	background-color: #533d8a;
+	background-color: #fed700;
     padding: 10px 30px;
 	text-align: center;
 	font-size: 15px;
-	color: #fff;
+	color: #000;
 	text-transform: uppercase;
 }
 .search-input .button-1:hover {
-	background-color: #5e3987;
+	-webkit-box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
 }
 .search-results {
-	margin: 30px 0 0;
+	margin: 10px 0 0;
 }
 .search-results .warning,
 .search-results .no-result {
@@ -6417,6 +6421,7 @@ pre {
 }
 .center-1 .buttons {
 	text-align: center;
+    padding-bottom: 10px;
 }
 .center-2 .inputs label {
 	width: 136px;
