@@ -1204,6 +1204,7 @@ namespace Nop.Web.Factories
             return model;
 
         }
+
         #endregion
 
         #region Vendors

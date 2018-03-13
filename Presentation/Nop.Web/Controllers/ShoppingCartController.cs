@@ -893,7 +893,7 @@ namespace Nop.Web.Controllers
                             //redirect to the shopping cart page
                             return Json(new
                             {
-                                redirect = Url.RouteUrl("ShoppingCart"),
+                                redirect = Url.RouteUrl("Checkout"),
                             });
                         }
                         

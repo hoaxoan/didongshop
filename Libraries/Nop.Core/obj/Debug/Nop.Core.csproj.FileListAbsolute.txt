@@ -57,3 +57,4 @@ E:\DiDongShop\Libraries\Nop.Core\bin\Debug\System.Web.WebPages.Deployment.xml
 E:\DiDongShop\Libraries\Nop.Core\bin\Debug\System.Web.WebPages.Razor.xml
 E:\DiDongShop\Libraries\Nop.Core\obj\Debug\Nop.Core.dll
 E:\DiDongShop\Libraries\Nop.Core\obj\Debug\Nop.Core.pdb
+E:\DiDongShop\Libraries\Nop.Core\obj\Debug\Nop.Core.csprojResolveAssemblyReference.cache

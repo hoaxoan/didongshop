@@ -28,6 +28,7 @@ using System.Threading.Tasks;
 using Nop.Services.Helpers;
 using System.Globalization;
 using Nop.Web.Models.ShoppingCart;
+using Nop.Services.Stores;
 
 namespace Nop.Web.Controllers
 {
@@ -58,6 +59,7 @@ namespace Nop.Web.Controllers
         private readonly HttpContextBase _httpContext;
         private readonly IAddressAttributeParser _addressAttributeParser;
         private readonly IAddressAttributeService _addressAttributeService;
+        private readonly IStoreMappingService _storeMappingService;
         private readonly IPushNotificationService _pushNotificationService;
 
         private readonly IDateTimeHelper _dateTimeHelper;
@@ -95,6 +97,7 @@ namespace Nop.Web.Controllers
             HttpContextBase httpContext,
             IAddressAttributeParser addressAttributeParser,
             IAddressAttributeService addressAttributeService,
+            IStoreMappingService storeMappingService,
             IPushNotificationService pushNotificationService,
             IDateTimeHelper dateTimeHelper,
             OrderSettings orderSettings,
@@ -126,6 +129,7 @@ namespace Nop.Web.Controllers
             this._httpContext = httpContext;
             this._addressAttributeParser = addressAttributeParser;
             this._addressAttributeService = addressAttributeService;
+            this._storeMappingService = storeMappingService;
             this._pushNotificationService = pushNotificationService;
             this._dateTimeHelper = dateTimeHelper;
 
@@ -247,10 +251,11 @@ namespace Nop.Web.Controllers
                 customerId: _workContext.CurrentCustomer.Id, pageSize: 1)
                     .FirstOrDefault();
             }
-            //if (order == null || order.Deleted || _workContext.CurrentCustomer.Id != order.CustomerId)
-            //{
-            //    return RedirectToRoute("HomePage");
-            //}
+
+            if (order == null || order.Deleted || _workContext.CurrentCustomer.Id != order.CustomerId)
+            {
+                return RedirectToRoute("HomePage");
+            }
 
             //disable "order completed" page?
             //if (_orderSettings.DisableOrderCompletedPage)
@@ -259,7 +264,7 @@ namespace Nop.Web.Controllers
             //}
 
             // Notification
-            //await _pushNotificationService.SendPushNotification(order);
+            await _pushNotificationService.SendPushNotification(order);
 
             //model
             var model = _checkoutModelFactory.PrepareCheckoutCompletedModel(order);
@@ -964,30 +969,27 @@ namespace Nop.Web.Controllers
                 //    _genericAttributeService, _storeContext.CurrentStore.Id);
                 processPaymentRequest.PaymentMethodSystemName = "Payments.CashOnDelivery";
 
-                //var placeOrderResult = _orderProcessingService.PlaceOrder(processPaymentRequest);
-                //if (placeOrderResult.Success)
-                //{
-                //    _httpContext.Session["OrderPaymentInfo"] = null;
-                //    var postProcessPaymentRequest = new PostProcessPaymentRequest
-                //    {
-                //        Order = placeOrderResult.PlacedOrder
-                //    };
-                //    _paymentService.PostProcessPayment(postProcessPaymentRequest);
+                var placeOrderResult = _orderProcessingService.PlaceOrder(processPaymentRequest);
+                if (placeOrderResult.Success)
+                {
+                    _httpContext.Session["OrderPaymentInfo"] = null;
+                    var postProcessPaymentRequest = new PostProcessPaymentRequest
+                    {
+                        Order = placeOrderResult.PlacedOrder
+                    };
+                    _paymentService.PostProcessPayment(postProcessPaymentRequest);
 
-                //    if (_webHelper.IsRequestBeingRedirected || _webHelper.IsPostBeingDone)
-                //    {
-                //        //redirection or POST has been done in PostProcessPayment
-                //        return Content("Redirected");
-                //    }
+                    if (_webHelper.IsRequestBeingRedirected || _webHelper.IsPostBeingDone)
+                    {
+                        //redirection or POST has been done in PostProcessPayment
+                        return Content("Redirected");
+                    }
 
-                //    return RedirectToRoute("CheckoutCompleted", new { orderId = placeOrderResult.PlacedOrder.Id });
-                //}
+                    return RedirectToRoute("CheckoutCompleted", new { orderId = placeOrderResult.PlacedOrder.Id });
+                }
 
-                //foreach (var error in placeOrderResult.Errors)
-                //    model.Warnings.Add(error);
-
-                // Push notification
-                return RedirectToRoute("CheckoutCompleted", new { orderId = 20 });
+                foreach (var error in placeOrderResult.Errors)
+                    model.Warnings.Add(error);
             }
             catch (Exception exc)
             {
@@ -1159,11 +1161,35 @@ namespace Nop.Web.Controllers
             if (!_orderSettings.OnePageCheckoutEnabled)
                 return RedirectToRoute("Checkout");
 
-            if (_workContext.CurrentCustomer.IsGuest() && !_orderSettings.AnonymousCheckoutAllowed)
-                return new HttpUnauthorizedResult();
+            //if (_workContext.CurrentCustomer.IsGuest() && !_orderSettings.AnonymousCheckoutAllowed)
+            //    return new HttpUnauthorizedResult();
 
             var model = _checkoutModelFactory.PrepareOnePageCheckoutModel(cart);
 
+            if (!_workContext.CurrentCustomer.IsGuest() 
+                && _workContext.CurrentCustomer.Addresses != null)
+            {
+                // address
+                var address = _workContext.CurrentCustomer.Addresses
+                    .Where(a => a.Country == null ||
+                        (//published
+                        a.Country.Published &&
+                        //allow billing
+                        a.Country.AllowsBilling &&
+                        //enabled for the current store
+                        _storeMappingService.Authorize(a.Country)))
+                    .FirstOrDefault();
+
+                if (address != null)
+                {
+                    model.FirstName = address.FirstName;
+                    model.PhoneNumber = address.PhoneNumber;
+                    model.Email = address.Email;
+                }
+            }
+            
+
+            // shoppingcart
             var shoppingCart = new ShoppingCartModel();
             shoppingCart = _shoppingCartModelFactory.PrepareShoppingCartModel(shoppingCart, cart,
                 isEditable: false,
@@ -1172,6 +1198,7 @@ namespace Nop.Web.Controllers
 
             model.ShoppingCart = shoppingCart;
 
+            // order summary
             model.OrderTotals = _shoppingCartModelFactory.PrepareOrderTotalsModel(cart, false);
 
             return View(model);
