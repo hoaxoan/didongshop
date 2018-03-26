@@ -4,6 +4,31 @@
         <name>Nop.Plugin.Api</name>
     </assembly>
     <members>
+        <member name="M:Nop.Plugin.Api.Controllers.ManufacturersController.GetManufacturers(Nop.Plugin.Api.Models.ManufacturersParameters.ManufacturersParametersModel)">
+            <summary>
+            Receive a list of all Categories
+            </summary>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="401">Unauthorized</response>
+        </member>
+        <member name="M:Nop.Plugin.Api.Controllers.ManufacturersController.GetManufacturersCount(Nop.Plugin.Api.Models.ManufacturersParameters.ManufacturersCountParametersModel)">
+            <summary>
+            Receive a count of all Categories
+            </summary>
+            <response code="200">OK</response>
+            <response code="401">Unauthorized</response>
+        </member>
+        <member name="M:Nop.Plugin.Api.Controllers.ManufacturersController.GetManufacturerById(System.Int32,System.String)">
+            <summary>
+            Retrieve category by spcified id
+            </summary>
+            <param name="id">Id of the category</param>
+            <param name="fields">Fields from the category you want your json to contain</param>
+            <response code="200">OK</response>
+            <response code="404">Not Found</response>
+            <response code="401">Unauthorized</response>
+        </member>
         <member name="M:Nop.Plugin.Api.Controllers.CustomerRolesController.GetAllCustomerRoles(System.String)">
             <summary>
             Retrieve all customer roles
@@ -319,6 +344,95 @@
             <response code="400">Bad Request</response>
             <response code="404">Not Found</response>
             <response code="401">Unauthorized</response>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.LocalizedNames">
+            <summary>
+            Gets or sets the localized names
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.Description">
+            <summary>
+            Gets or sets the description
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.ManufacturerTemplateId">
+            <summary>
+            Gets or sets a value of used manufacturer template identifier
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.MetaKeywords">
+            <summary>
+            Gets or sets the meta keywords
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.MetaDescription">
+            <summary>
+            Gets or sets the meta description
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.MetaTitle">
+            <summary>
+            Gets or sets the meta title
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.PageSize">
+            <summary>
+            Gets or sets the page size
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.PageSizeOptions">
+            <summary>
+            Gets or sets the available customer selectable page size options
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.PriceRanges">
+            <summary>
+            Gets or sets the available price ranges
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.ShowOnHomePage">
+            <summary>
+            Gets or sets a value indicating whether to show the category on home page
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.IncludeInTopMenu">
+            <summary>
+            Gets or sets a value indicating whether to include this category in the top menu
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.HasDiscountsApplied">
+            <summary>
+            Gets or sets a value indicating whether this category has discounts applied
+            <remarks>The same as if we run category.AppliedDiscounts.Count > 0
+            We use this property for performance optimization:
+            if this property is set to false, then we do not need to load Applied Discounts navigation property
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.Published">
+            <summary>
+            Gets or sets a value indicating whether the entity is published
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.Deleted">
+            <summary>
+            Gets or sets a value indicating whether the entity has been deleted
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.DisplayOrder">
+            <summary>
+            Gets or sets the display order
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.CreatedOnUtc">
+            <summary>
+            Gets or sets the date and time of instance creation
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.DTOs.Manufacturers.ManufacturerDto.UpdatedOnUtc">
+            <summary>
+            Gets or sets the date and time of instance update
+            </summary>
         </member>
         <member name="P:Nop.Plugin.Api.DTOs.CustomerRoles.CustomerRoleDto.Id">
             <summary>
@@ -1797,6 +1911,65 @@
             Extensions
             </summary>
         </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.BaseManufacturersParametersModel.CreatedAtMin">
+            <summary>
+            Show categories created after date (format: 2008-12-31 03:00)
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.BaseManufacturersParametersModel.CreatedAtMax">
+            <summary>
+            Show categories created before date (format: 2008-12-31 03:00)
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.BaseManufacturersParametersModel.UpdatedAtMin">
+            <summary>
+            Show categories last updated after date (format: 2008-12-31 03:00)
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.BaseManufacturersParametersModel.UpdatedAtMax">
+            <summary>
+            Show categories last updated before date (format: 2008-12-31 03:00)
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.BaseManufacturersParametersModel.PublishedStatus">
+            <summary>
+            <ul>
+            <li>published - Show only published categories</li>
+            <li>unpublished - Show only unpublished categories</li>
+            <li>any - Show all categories(default)</li>
+            </ul>
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.BaseManufacturersParametersModel.ProductId">
+            <summary>
+            Show only the categories to which the product is mapped to
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.ManufacturersParametersModel.Ids">
+            <summary>
+            A comma-separated list of category ids
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.ManufacturersParametersModel.Limit">
+            <summary>
+            Amount of results (default: 50) (maximum: 250)
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.ManufacturersParametersModel.Page">
+            <summary>
+            Page to show (default: 1)
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.ManufacturersParametersModel.SinceId">
+            <summary>
+            Restrict results to after the specified ID
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ManufacturersParameters.ManufacturersParametersModel.Fields">
+            <summary>
+            comma-separated list of fields to include in the response
+            </summary>
+        </member>
         <member name="P:Nop.Plugin.Api.Models.ProductAttributes.ProductAttributesParametersModel.Ids">
             <summary>
             A comma-separated list of category ids
@@ -2106,6 +2279,11 @@
         <member name="P:Nop.Plugin.Api.Models.ProductsParameters.BaseProductsParametersModel.CategoryId">
             <summary>
             Show only the products mapped to the specified category
+            </summary>
+        </member>
+        <member name="P:Nop.Plugin.Api.Models.ProductsParameters.BaseProductsParametersModel.ManufacturerId">
+            <summary>
+            Show only the products mapped to the specified manufacturer
             </summary>
         </member>
         <member name="P:Nop.Plugin.Api.Models.ProductsParameters.ProductsParametersModel.Ids">
