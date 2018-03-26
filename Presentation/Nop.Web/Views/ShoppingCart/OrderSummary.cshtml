@@ -1,4 +1,4 @@
-@model ShoppingCartModel
+﻿@model ShoppingCartModel
 @using Nop.Core
 @using Nop.Core.Domain.Tax
 @using Nop.Core.Infrastructure
@@ -309,14 +309,22 @@
        if (Model.IsEditable)
        {
             @Html.Action("CrossSellProducts", "Product")
-       }
+           }
        }
    }
    else
    {
-       <div class="no-data">
+        <div style="background: #fff;padding-top: 30px;padding-bottom: 20px;">
+            <div>
+               <div style="text-align: center;">@T("ShoppingCart.CartIsEmpty")</div> 
+                <a href="/" class="buyother">@T("Account.BuyMore")</a>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+       @*<div class="no-data">
            @T("ShoppingCart.CartIsEmpty")
-       </div>
+       </div>*@
    }
    @Html.Widget("order_summary_content_after")
 </div>

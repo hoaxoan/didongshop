@@ -149,10 +149,7 @@
                         </div>
                     }*@
                 </div>
-                @Html.Widget("productdetails_before_collateral", Model.Id)
-                <div class="product-collateral">
-                    @Html.Partial("_ProductTags", Model.ProductTags)
-                </div>
+                @Html.Widget("productdetails_before_collateral", Model.Id)                
             </div>
         }
 
@@ -171,11 +168,14 @@
         <div class="fs-dttabsmbox">
             <ul class="fs-dttabs fs-dttabtop">
                 <li class="active">
-                    <a toscroll="" href="#dac-diem-noi-bat" title="">Đặc điểm nổi bật</a>
+                    <a toscroll="" href="#dac-diem-noi-bat" title="">@T("Products.Tabs.Description")</a>
                 </li>
-                <li>
-                    <a toscroll="" href="#thong-so-ky-thuat" title="">Thông số kỹ thuật</a>
-                </li>
+                @if (Model.ProductSpecifications.Count > 0)
+                {
+                    <li>
+                        <a toscroll="" href="#thong-so-ky-thuat" title="">@T("Products.Tabs.Specification")</a>
+                    </li>
+                }
             </ul>
 
         </div>
@@ -194,6 +194,12 @@
 
 @Html.Partial("_ProductSpecifications", Model.ProductSpecifications)
 
+@if (Model.ProductTags.Count > 0)
+{
+    <div class="product-collateral">
+        @Html.Partial("_ProductTags", Model.ProductTags)
+    </div>
+}
 
 <script type="text/javascript">
     $(window).load(function () {
