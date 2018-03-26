@@ -115,6 +115,7 @@ input[type="radio"],
 input[type="checkbox"] + *,
 input[type="radio"] + * {
 	vertical-align: middle;
+    margin-top: -10px;
 }
 input[type="button"], input[type="submit"],
 button, .button-1, .button-2 {
@@ -971,7 +972,7 @@ label, label + * {
 }
 .footer-block .title {
 	margin: 0 0 1px;
-	background: #533d8a url('../images/toggle-white.png') right center no-repeat;
+	background: #fed700 url('../images/toggle-white.png') right center no-repeat;
 	padding: 10px 15px;
 	font-size: 20px;
 	color: #288ad6;
@@ -1171,9 +1172,9 @@ label, label + * {
 	position: relative;
 	/*margin: 0 0 10px;*/
 	/*border-bottom: 1px solid #ddd;*/
-	background: #533d8a url('../images/toggle-gray.png') right 14px no-repeat;
+	background: #288ad6 url('../images/toggle-gray.png') right 14px no-repeat;
 	font-size: 16px;
-    color: #533d8a;
+    color: #288ad6;
     cursor: pointer;
     padding: 12px;
 }
@@ -2298,8 +2299,11 @@ label, label + * {
 }
 
 .product-collateral {
-	margin: 0 0 0px;
+    background: #fff;
+    margin-bottom: 20px;
+    padding: 10px 15px;
 }
+
 .product-collateral .title {
 	margin: 0 0 10px;
 	font-size: 18px;
@@ -3217,6 +3221,7 @@ label, label + * {
 	margin: 5px;
 	font-size: 14px; /*reset zeroing*/
 	color: #444;
+    margin-top: -2px;
 }
 .login-page .returning-wrapper .inputs.reversed a:hover {
 	color: #533d8a;
@@ -3278,6 +3283,8 @@ label, label + * {
 
 .account-page .buttons {
 	text-align: center;
+    background: #fff;
+    padding-bottom: 10px;
 }
 .account-page .description {
 	margin: 0 0 25px;
@@ -4255,6 +4262,7 @@ label, label + * {
 
 .search-input{
     background: #fff;
+    padding-bottom: 10px;
 }
 
 .search-page .page-title {
@@ -5440,11 +5448,11 @@ pre {
 .menu-toggle-main {
     font-size: 15px;
     font-weight: bold;
-    color: #fff;
+    color: #000;
     text-transform: uppercase;
     cursor: pointer;
     min-height: 48px;
-    background-color: #533d8a;
+    background-color: #fed700;
     padding: 14px 0px 10px 15px;
     box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 }
@@ -5774,7 +5782,7 @@ pre {
     .footer-block.information .title,
     .footer-block.customer-service .title,
     .footer-block.my-account .title{
-        color: #fff;
+        color: #000;
     }
 }
 
@@ -6421,7 +6429,7 @@ pre {
 }
 .center-1 .buttons {
 	text-align: center;
-    padding-bottom: 10px;
+    /*padding-bottom: 10px;*/
 }
 .center-2 .inputs label {
 	width: 136px;
@@ -7624,11 +7632,17 @@ html, body, div, span, applet, object, h1, h2, h3, h4, h5, h6, p, blockquote, a,
 }
 
 .iconblm-login {
-    background-position: -222px -13px;
+    background-image: url(../images/ic-account.jpg);
     width: 36px;
     height: 36px;
     display: block;
-    margin-left: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+    list-style: none;
+    position: relative;
+    padding: 0;
+    line-height: 34px;
+    margin: 0px 8px;
 }
 
 .iconblm-online {
@@ -8386,6 +8400,7 @@ section {
 .account-page{
     margin: 10px 0 0px;
     padding: 0 0 5px;
+    background: #fff;
 }
 
 
@@ -8825,6 +8840,7 @@ section {
     overflow: visible;
     position: relative;
     width: 600px;
+    height: 32px;
 }
 
 .picsuccess img {
@@ -8924,4 +8940,102 @@ section {
     text-transform: uppercase;
     border: 1px solid #288ad6;
     border-radius: 4px;
+}
+
+@media all and (max-width: 769px) {
+    .homebanner {
+        width: 100%;
+        margin-bottom: 0px;
+        height: auto;
+    }
+
+    #sync2 {
+        display: none !important;
+    }
+
+    .homenews {
+        display: none;
+    }
+
+    .homeproduct li {
+        float: left;
+        position: relative;
+        background: #fff;
+        width: 33.3%;
+        overflow: hidden;
+        border-top: 1px solid #eee;
+        border-right: 1px solid #eee;
+    }
+
+}
+
+
+@media all and (min-width: 769px) {
+    .homebanner {
+        width: 100%;
+        margin-bottom: 0px;
+        height: auto;
+    }
+
+    #sync2 {
+        display: none;
+    }
+
+    .homenews {
+        display: none;
+    }
+
+    .homeproduct li {
+        width: 24.7%;
+    }
+}
+
+@media all and (min-width: 1001px) {
+
+    .homebanner {
+        width: 65.834%;
+        height: 354px;
+        margin-bottom: 15px;
+    }
+
+    #sync2 {
+        display: block;
+    }
+
+    .homenews {
+        display: block;
+    }
+
+    .homeproduct li {
+        width: 19.917%;
+    }
+}
+
+
+
+@media all and (max-width: 481px) {
+    .homebanner {
+        width: 100%;
+        margin-bottom: 0px;
+        height: auto;
+    }
+
+    #sync2 {
+        display: none !important;
+    }
+
+    .homenews {
+        display: none;
+    }
+
+    .homeproduct li {
+        float: left;
+        position: relative;
+        background: #fff;
+        width: 49.7%;
+        overflow: hidden;
+        border-top: 1px solid #eee;
+        border-right: 1px solid #eee;
+    }
+
 }
