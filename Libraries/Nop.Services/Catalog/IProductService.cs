@@ -39,6 +39,12 @@ namespace Nop.Services.Catalog
         IList<Product> GetProductsDisplayedOnHomePageByCategoryID(int categoryId);
 
         /// <summary>
+        /// Gets all products displayed on the home page
+        /// </summary>
+        /// <returns>Products</returns>
+        IList<Product> GetAllProductsDisplayedOnHomePageByCategoryID(int categoryId);
+
+        /// <summary>
         /// Gets product
         /// </summary>
         /// <param name="productId">Product identifier</param>
