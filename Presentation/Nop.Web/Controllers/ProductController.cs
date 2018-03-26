@@ -427,14 +427,13 @@ namespace Nop.Web.Controllers
         }
 
         [ChildActionOnly]
-        public virtual ActionResult HomepageProducts1(int? productThumbPictureSize)
+        public virtual ActionResult HomepageProducts1(int categoryId, int? productThumbPictureSize)
         {
-            var categoryId = 1;
             var category = _categoryService.GetCategoryById(categoryId);
             if (category == null)
                 return Content("");
 
-            var products = _productService.GetProductsDisplayedOnHomePageByCategoryID(category.Id);
+            var products = _productService.GetAllProductsDisplayedOnHomePageByCategoryID(category.Id);
             //ACL and store mapping
             products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
             //availability dates
