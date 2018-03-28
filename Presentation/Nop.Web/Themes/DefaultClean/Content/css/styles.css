@@ -7632,7 +7632,12 @@ html, body, div, span, applet, object, h1, h2, h3, h4, h5, h6, p, blockquote, a,
 }
 
 .iconblm-login {
-    background-image: url(../images/ic-account.jpg);
+    background-position: -222px -13px;
+    width: 36px;
+    height: 36px;
+    display: block;
+    margin-left: 2px;
+    /*background-image: url(../images/ic-account.jpg);
     width: 36px;
     height: 36px;
     display: block;
@@ -7642,7 +7647,7 @@ html, body, div, span, applet, object, h1, h2, h3, h4, h5, h6, p, blockquote, a,
     position: relative;
     padding: 0;
     line-height: 34px;
-    margin: 0px 8px;
+    margin: 0px 8px;*/
 }
 
 .iconblm-online {
