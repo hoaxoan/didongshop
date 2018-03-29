@@ -107,6 +107,11 @@ namespace Nop.Core.Domain.Catalog
         public DateTime UpdatedOnUtc { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to show the product on home page
+        /// </summary>
+        public bool ShowOnHomePage { get; set; }
+
+        /// <summary>
         /// Gets or sets the collection of applied discounts
         /// </summary>
         public virtual ICollection<Discount> AppliedDiscounts
