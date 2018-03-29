@@ -79,6 +79,16 @@ namespace Nop.Core.Domain.News
         public DateTime CreatedOnUtc { get; set; }
 
         /// <summary>
+        /// Gets or sets the parent picture identifier
+        /// </summary>
+        public int PictureId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the external url
+        /// </summary>
+        public string ExternalUrl { get; set; }
+
+        /// <summary>
         /// Gets or sets the news comments
         /// </summary>
         public virtual ICollection<NewsComment> NewsComments
