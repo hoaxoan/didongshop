@@ -185,9 +185,16 @@
         @if (!String.IsNullOrEmpty(Model.FullDescription))
         {
             <div class="full-description" itemprop="description">
-                @Html.Raw(Model.FullDescription)
+                <article class="area_article" style="height: 657px;">
+                    @Html.Raw(Model.FullDescription)
+                </article>
+
+                <p class="show-more" onclick="showArticle();">
+                    <a href="javascript:;" class="readmore">Đọc thêm </a>
+                </p>
             </div>
         }
+        
     </div>
 </div>
 
@@ -209,6 +216,11 @@
         });
     });
 
+    function showArticle() {
+        $('.area_article').height('');
+        $('.area_article').addClass('area_articleFull');
+        $('.show-more').hide();
+    }
 </script>
 
 
