@@ -924,6 +924,7 @@ label, label + * {
     margin: 0 0 20px;
     text-align: center;
     width: 270px;
+    padding-right: 16px;
 }
 
     .header-logo a {
@@ -7643,7 +7644,7 @@ pre {
         display: table-cell;
         text-align: left;
         vertical-align: middle;
-        width: 450px;
+        /*width: 450px;*/
     }
 
         .search-box input.search-box-text,
